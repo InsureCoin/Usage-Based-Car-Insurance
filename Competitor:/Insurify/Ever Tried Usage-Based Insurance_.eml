@@ -1,0 +1,1391 @@
+Delivered-To: seodatascience@gmail.com
+Received: by 2002:a05:6520:2356:b0:1a3:7f2d:e9ba with SMTP id c22csp3605994lkc;
+        Tue, 19 Apr 2022 14:01:49 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzTbST1OqQEKGdkFjpyv50Vloyxjvo+JAq+/o1agFZ3GqE9RaV2XUOss3FZK7a5T/8TLAns
+X-Received: by 2002:a05:6902:100b:b0:645:1be2:b6c0 with SMTP id w11-20020a056902100b00b006451be2b6c0mr9593451ybt.157.1650402109035;
+        Tue, 19 Apr 2022 14:01:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1650402109; cv=none;
+        d=google.com; s=arc-20160816;
+        b=xwxUaLHv40hrlqDCCYGtfMPZeH3DhQQso3WQGTy34FMYAGeZ7yAcpmmqD3SVkJBUrT
+         x8vkMB7pNRFe1iOSQvl//5X6WGeeOptLtSpprizrAtsUIqgb3D5GG1m+xurbFh98HS/p
+         yVW6eVV1PHJUnLlIqDG8FL7/7FgC4hUgArYm9koijcJpQVCgL9gWlXNxBWF/rymZqhtK
+         hir2iMKrbuUsX6Sx+3b1plb8/bOKBAWZQjMadF06mPPwx93fh9g6/QPy22ZHzlLtPKBq
+         8iM38RMDu0GbkcCUtISYCKhlUdK9WLV/a6DlMqQmOy7l0iWg+OorL85aTQr7OgpndD02
+         Cvww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:list-unsubscribe:subject:message-id:mime-version:from:date
+         :dkim-signature:dkim-signature;
+        bh=cXIA/TT3N9W/NpEoOBGMlI48PttYK/NlI95wXyA2TYk=;
+        b=HsmO0xTsfhq0se2kTV5RQRw1/tzgzWmTnxi4knyNvwDtgHG8py9SPyGiKlb58E1wSl
+         PfR1wO3j3iOAtj9si4B+X8n4qPee9F6KMs/xnHWTS5ZRCWJAgYCBnJtgeSNlNDeA6jqk
+         hBDNZXw9qlIGKBHW51412jfQ+qZZ68nxg8J14LShORYvpcN1c1Iy2FOVy01CgaSVPcm+
+         lkP7oQ/8mEqu976gxxt/0f7aqX56wwn08rbfOTvUGc7emWWv0RGOvwxbAtkesLDglmC7
+         Mpq01pWxph0bdxdYNeqwUqc0HW//c2EtbDOp6SYRzfQmqsNB61zE/bUN5KeYXce+sLFU
+         Yx7w==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@insurify.com header.s=kl header.b=OnXkORtA;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=pNnyzAYy;
+       spf=pass (google.com: domain of bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com designates 149.72.139.128 as permitted sender) smtp.mailfrom="bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com";
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.insurify.com
+Return-Path: <bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com>
+Received: from o1373.shared.klaviyomail.com (o1373.shared.klaviyomail.com. [149.72.139.128])
+        by mx.google.com with ESMTPS id 189-20020a2514c6000000b00641266349bfsi104015ybu.190.2022.04.19.14.01.48
+        for <seodatascience@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 Apr 2022 14:01:49 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com designates 149.72.139.128 as permitted sender) client-ip=149.72.139.128;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@insurify.com header.s=kl header.b=OnXkORtA;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=pNnyzAYy;
+       spf=pass (google.com: domain of bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com designates 149.72.139.128 as permitted sender) smtp.mailfrom="bounces+10356951-98e7-seodatascience=gmail.com@email.insurify.com";
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.insurify.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=insurify.com;
+	h=content-type:from:mime-version:subject:list-unsubscribe:x-feedback-id:
+	to;
+	s=kl; bh=cXIA/TT3N9W/NpEoOBGMlI48PttYK/NlI95wXyA2TYk=;
+	b=OnXkORtAsjilKmU9jMkRtCWlZHAGGklzL5NzaaioPnvOlYUeTBq5AJUStc/iQxAi5DgM
+	nwyO9+p9bClJFEpSU0jL88lo9gEhjPQ4T2SYKbxOx9LE19qDKTXuFatAt7slzRI4yATcBz
+	MWa7fqyEzMDv0O1L6LH82gSnNhgvC18RN1/x/GjpC2/7HfxKDQK/47zziLg3i5rKgKDPA3
+	4pRzhlGcXYB554QW6+3NquQa+NHlg/PwdsPRQkp5QyrcZ+uu6ME55EJIp+Ibxq1tAsMQuW
+	JClG/qCXSWfXIWF4gs/x4xeMrb339F81LNGnneEGjTOWE1zaa/cXk0XxYunIrb2A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=content-type:from:mime-version:subject:list-unsubscribe:x-feedback-id:
+	to;
+	s=smtpapi; bh=cXIA/TT3N9W/NpEoOBGMlI48PttYK/NlI95wXyA2TYk=;
+	b=pNnyzAYyxY2+3YtEqqGErJa/uq2aivOXAJS3z1wU7jYqggjY6SJC5MlL9fkUmRamzWO/
+	1qbqnw7cg43b5OElrNnjxmGT8dCsMgAtBTMwVdQjII+7CQKVY+0i/fT2KJkL10/V4u+/RB
+	LF3OWrJDztz8ei6QptX7o2Yel9lriDSt0=
+Received: by filterdrecv-599676dbf5-t9pjh with SMTP id filterdrecv-599676dbf5-t9pjh-1-625F233B-1
+        2022-04-19 21:01:47.025992373 +0000 UTC m=+1120456.295014095
+Received: from MTAzNTY5NTE (unknown)
+	by geopod-ismtpd-4-0 (SG) with HTTP
+	id B10VUFp9SSCxBQfkvTM_qg
+	Tue, 19 Apr 2022 21:01:46.967 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=20183a681f18e53c3c233c0b643cadc60be37699476a4d75409796f6a85d
+Date: Tue, 19 Apr 2022 21:01:47 +0000 (UTC)
+From: Insurify <hello@email.insurify.com>
+Mime-Version: 1.0
+Message-ID: <B10VUFp9SSCxBQfkvTM_qg@geopod-ismtpd-4-0>
+Subject: Ever Tried Usage-Based Insurance?
+List-Unsubscribe: 
+ =?us-ascii?Q?=3Chttps=3A=2F=2Fmanage=2Ekmail-lists=2Ecom=2Fsubscriptions=2Funsubscribe=3Fa=3DMB?=
+ =?us-ascii?Q?Fjw3&c=3D01F7KX2PBAY8M3YSEP9J91X143&k=3D3f7?=
+ =?us-ascii?Q?e5b6245f6516739f47f33c18c45dd&m=3DRzAKLp&?=
+ =?us-ascii?Q?r=3DNE37muW=3E?=
+X-Kmail-Ops: 01F7KX2PBAY8M3YSEP9J91X143
+X-Kmail-Message: RzAKLp
+X-Kmail-Account: MBFjw3
+X-Kmail-Relay: [255679.krelaymail.com]:587
+X-Feedback-ID: 10356951:SG
+X-SG-EID: 
+ =?us-ascii?Q?c2umeWnbiJOWkzHFXORTCC4lnJY=2FKiM+A1mDzaJq+S=2FoRdQ72kYKVc1nW=2FbjYO?=
+ =?us-ascii?Q?I2LDlkVUCP=2FgTDzFlsCS3XlxQWz6Y5Bbc4ike4y?=
+ =?us-ascii?Q?Jl+So+yz6yX=2FPfW7SxWYjxcZxhPmog3=2Fexq9X9T?=
+ =?us-ascii?Q?S8pdEUTDT92QAB22HuaSrUeEs2jZ4qCfa6LRfiN?=
+ =?us-ascii?Q?Ys347cRe8G=2Fz0Fh18ls4+h=2FwDTQnBVOgKXUSbPz?=
+ =?us-ascii?Q?mXuMjY1M6uhKJPLpSbqaQ57Phm9FFlJIah8ykD?=
+X-SG-ID: 
+ =?us-ascii?Q?N2C25iY2uzGMFz6rgvQsb3WdckyvbC2eFaxvdDHn8D1nndBBW0fUClUlZF2fTQ?=
+ =?us-ascii?Q?6K3KxzOupQuadolOH3UJuramaQjufHMAqIF3k2c?=
+ =?us-ascii?Q?jVFGETooYEzYzIlRyYx=2FCir51iPg3NSNSH+d1nB?=
+ =?us-ascii?Q?BuNPpGbpb62E1rOLOwo6S7OXMse70a4uZH=2Fg7yW?=
+ =?us-ascii?Q?3FB5jhO06SD=2F4pzGiuodtqAMt9cFTrAtNHg=3D=3D?=
+To: Benjamin Townsend <seodatascience@gmail.com>
+X-Entity-ID: EpMwNKJ+oFwnnT6CUbj0HQ==
+
+--20183a681f18e53c3c233c0b643cadc60be37699476a4d75409796f6a85d
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Mime-Version: 1.0
+
+Can't see this email? [View in Your Browser](https://manage.kmail-lists.com=
+/subscriptions/web-view?a=3DMBFjw3&c=3D01F7KX2PBAY8M3YSEP9J91X143&k=3D3f7e5=
+b6245f6516739f47f33c18c45dd&m=3DRzAKLp&r=3DNE37muW)
+
+https://insurify.com/
+
+https://insurify.com/
+
+[user based insurance illustration](https://insurify.com/load/d51cd9bc-b44d=
+-43d5-a5fc-9f8ac1f1117c)
+
+Usage-Based
+Car Insurance
+Can Be Rewarding
+
+[PAY LESS FOR COVERAGE](https://insurify.com/load/d51cd9bc-b44d-43d5-a5fc-9=
+f8ac1f1117c)
+
+[user based insurance illustration](https://insurify.com/load/d51cd9bc-b44d=
+-43d5-a5fc-9f8ac1f1117c)
+
+Hey Benjamin,
+
+Usage-based insurance (aka low-mileage) allows you to reduce expenses relat=
+ive to driving history. This means you can pay less for car insurance based=
+ on how and when you drive. But before acquiring usage-based insurance, you=
+ should always explore your options.
+
+[FIND CHEAPER INSURANCE](https://insurify.com/load/d51cd9bc-b44d-43d5-a5fc-=
+9f8ac1f1117c)
+
+Driving safer makes you less risky to insurance providers. So when you driv=
+e less and practice good behavior on the road, you can enjoy reduced rates.
+
+Your provider may actively track your driving habits to ensure you qualify.=
+ This is usually done through GPS and an app. So by not speeding, not texti=
+ng while driving, and not cruising late at night, you can save on insurance=
+. Plus there are other things you can practice to pay even less.
+
+It's also easy to lower your mileage and further increase your chances of s=
+aving. You can start by using public transport or hire a rideshare service.=
+ Walking, working from home, or riding a bike are also viable alternatives.
+
+But ensuring your usage-based policy covers only what you need and nothing =
+more can be a win. The most convenient way to do this is by using [Insurify=
+](https://insurify.com/load/d51cd9bc-b44d-43d5-a5fc-9f8ac1f1117c) to compar=
+e the best rates nationwide.
+
+[COMPARE RATES](https://insurify.com/load/d51cd9bc-b44d-43d5-a5fc-9f8ac1f11=
+17c)
+
+To better pricing,
+=E2=80=8BThe Insurify Team
+
+[INSURIFY](https://insurify.com/)
+
+Insurify, Inc
+
+245 Main Street 11th Floor Cambridge, MA 02142
+
+=C2=A0
+
+=C2=A9 2013-2022 Insurify, Inc. All rights reserved. Insurify Insurance Age=
+ncy is a licensed=C2=A0insurance agency in 50 states.
+
+[Facebook](https://facebook.com/insurify/)
+[Twitter](https://twitter.com/insurify)
+
+No longer want to receive these emails? [Unsubscribe](https://manage.kmail-=
+lists.com/subscriptions/unsubscribe?a=3DMBFjw3&c=3D01F7KX2PBAY8M3YSEP9J91X1=
+43&k=3D3f7e5b6245f6516739f47f33c18c45dd&m=3DRzAKLp&r=3DNE37muW) or=C2=A0[Ma=
+nage Your Preferences](http://insurify---test.myklpages.com/p/pause_my_emai=
+ls?a=3DMBFjw3&c=3D01F7KX2PBAY8M3YSEP9J91X143&k=3D3f7e5b6245f6516739f47f33c1=
+8c45dd&m=3DRzAKLp&r=3DNE37muW).
+
+=E2=80=8C
+--20183a681f18e53c3c233c0b643cadc60be37699476a4d75409796f6a85d
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Mime-Version: 1.0
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type">
+<meta content=3D"width=3Ddevice-width, initial-scale=3D1" name=3D"viewport"=
+>
+<title></title>
+<style type=3D"text/css">@media only screen and (max-width:480px){body,tabl=
+e,td,p,a,li,blockquote{-webkit-text-size-adjust:none !important}body{width:=
+100% !important;min-width:100% !important}#bodyCell{padding:10px !important=
+}table.kmMobileHide{display:none !important}table.kmDesktopOnly,td.kmDeskto=
+pOnly,th.kmDesktopOnly,tr.kmDesktopOnly,td.kmDesktopWrapHeaderMobileNone{di=
+splay:none !important}table.kmMobileOnly{display:table !important}tr.kmMobi=
+leOnly{display:table-row !important}td.kmMobileOnly,td.kmDesktopWrapHeader,=
+th.kmMobileOnly{display:table-cell !important}tr.kmMobileNoAlign,table.kmMo=
+bileNoAlign{float:none !important;text-align:initial !important;vertical-al=
+ign:middle !important;table-layout:fixed !important}tr.kmMobileCenterAlign{=
+float:none !important;text-align:center !important;vertical-align:middle !i=
+mportant;table-layout:fixed !important}td.kmButtonCollection{padding-left:9=
+px !important;padding-right:9px !important;padding-top:9px !important;paddi=
+ng-bottom:9px !important}td.kmMobileHeaderStackDesktopNone,img.kmMobileHead=
+erStackDesktopNone,td.kmMobileHeaderStack{display:block !important;margin-l=
+eft:auto !important;margin-right:auto !important;padding-bottom:9px !import=
+ant;padding-right:0 !important;padding-left:0 !important}td.kmMobileWrapHea=
+der,td.kmMobileWrapHeaderDesktopNone{display:inline-block !important}td.kmM=
+obileHeaderSpacing{padding-right:10px !important}td.kmMobileHeaderNoSpacing=
+{padding-right:0 !important}table.kmDesktopAutoWidth{width:inherit !importa=
+nt}table.kmMobileAutoWidth{width:100% !important}table.kmTextContentContain=
+er{width:100% !important}table.kmBoxedTextContentContainer{width:100% !impo=
+rtant}td.kmImageContent{padding-left:0 !important;padding-right:0 !importan=
+t}img.kmImage{width:100% !important}td.kmMobileStretch{padding-left:0 !impo=
+rtant;padding-right:0 !important}table.kmSplitContentLeftContentContainer,t=
+able.kmSplitContentRightContentContainer,table.kmColumnContainer,td.kmVerti=
+calButtonBarContentOuter table.kmButtonBarContent,td.kmVerticalButtonCollec=
+tionContentOuter table.kmButtonCollectionContent,table.kmVerticalButton,tab=
+le.kmVerticalButtonContent{width:100% !important}td.kmButtonCollectionInner=
+{padding-left:9px !important;padding-right:9px !important;padding-top:9px !=
+important;padding-bottom:9px !important}td.kmVerticalButtonIconContent,td.k=
+mVerticalButtonTextContent,td.kmVerticalButtonContentOuter{padding-left:0 !=
+important;padding-right:0 !important;padding-bottom:9px !important}table.km=
+SplitContentLeftContentContainer td.kmTextContent,table.kmSplitContentRight=
+ContentContainer td.kmTextContent,table.kmColumnContainer td.kmTextContent,=
+table.kmSplitContentLeftContentContainer td.kmImageContent,table.kmSplitCon=
+tentRightContentContainer td.kmImageContent{padding-top:9px !important}td.r=
+owContainer.kmFloatLeft,td.rowContainer.kmFloatLeft,td.rowContainer.kmFloat=
+Left.firstColumn,td.rowContainer.kmFloatLeft.firstColumn,td.rowContainer.km=
+FloatLeft.lastColumn,td.rowContainer.kmFloatLeft.lastColumn{float:left;clea=
+r:both;width:100% !important}table.templateContainer,table.templateContaine=
+r.brandingContainer,div.templateContainer,div.templateContainer.brandingCon=
+tainer,table.templateRow{max-width:600px !important;width:100% !important}h=
+1{font-size:30px !important;line-height:1.1 !important}h2{font-size:28px !i=
+mportant;line-height:1.1 !important}h3{font-size:20px !important;line-heigh=
+t:1.1 !important}h4{font-size:18px !important;line-height:1.1 !important}td=
+.kmTextContent{font-size:16px !important;line-height:1.3 !important}td.kmTe=
+xtBlockInner td.kmTextContent{padding-right:18px !important;padding-left:18=
+px !important}table.kmTableBlock.kmTableMobile td.kmTableBlockInner{padding=
+-left:9px !important;padding-right:9px !important}table.kmTableBlock.kmTabl=
+eMobile td.kmTableBlockInner .kmTextContent{font-size:16px !important;line-=
+height:1.3 !important;padding-left:4px !important;padding-right:4px !import=
+ant}}</style>
+<!--[if mso]>
+    <style>
+     =20
+      .templateContainer {
+        border: 0px none #aaaaaa;
+        background-color: #ffffff;
+       =20
+          border-radius: 0px;
+       =20
+      }
+      #brandingContainer {
+        background-color: transparent !important;
+        border: 0;
+      }
+     =20
+     =20
+      .templateContainerInner {
+        padding: 0px;
+      }
+     =20
+    </style>
+  <![endif]-->
+<style>span.yshortcuts:hover {background-color:none !important;border:none =
+!important}
+span.yshortcuts:active {background-color:none !important;border:none !impor=
+tant}
+span.yshortcuts:focus {background-color:none !important;border:none !import=
+ant}
+.rowContainer .kmTextContent a:link {color:#2980B9;font-weight:bold;text-de=
+coration:underline}
+.rowContainer .kmTextContent a:visited {color:#2980B9;font-weight:bold;text=
+-decoration:underline}
+.kmTable .kmTableRow:last-child > td {border-bottom:none !important}</style=
+></head>
+<body style=3D"margin:0; padding:0; background-color:#EFEFEF">
+
+<div style=3D"display:none !important;visibility:hidden;mso-hide:all;font-s=
+ize:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:=
+0;overflow:hidden;">Drive Less, Save More</div>
+<div style=3D"display:none !important;visibility:hidden;mso-hide:all;font-s=
+ize:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:=
+0;overflow:hidden;">&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C</div>
+<center>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" da=
+ta-upload-file-url=3D"/ajax/email-editor/file/upload" data-upload-files-url=
+=3D"/ajax/email-editor/files/upload" id=3D"bodyTable" style=3D"border-colla=
+pse:collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:auto; ma=
+rgin:0; padding:0; background-color:#EFEFEF; height:100%; width:100%" width=
+=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" id=3D"bodyCell" style=3D"border-collapse:collapse; mso=
+-table-lspace:0; mso-table-rspace:0; table-layout:auto; margin:0; border-to=
+p:0; padding-bottom:20px; padding-left:20px; padding-right:20px; padding-to=
+p:20px; height:100%; width:100%" valign=3D"top">
+<!--[if !mso]><!-->
+<div class=3D"templateContainer" style=3D"background-color:#fff; border:0 n=
+one #aaa; border-radius:0; display:table; width:600px">
+<div class=3D"templateContainerInner" style=3D"padding:0">
+<!--<![endif]-->
+<!--[if mso]>
+              <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=
+=3D"templateContainer"  width=3D"600" style=3D"border-collapse:collapse;mso=
+-table-lspace:0;mso-table-rspace:0;">
+              <tbody>
+                <tr>
+                  <td class=3D"templateContainerInner" style=3D"border-coll=
+apse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+            <![endif]-->
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-col=
+lapse:collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed"=
+ width=3D"100%">
+<tbody><tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#727272; font-family:=
+&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sa=
+ns&quot;, Geneva, Verdana, sans-serif; font-size:12px; letter-spacing:0; li=
+ne-height:1.3; max-width:100%; text-align:center; word-wrap:break-word; pad=
+ding-bottom:9px; padding-right:18px; padding-left:18px; padding-top:9px; ba=
+ckground-color:#F2F4F3" valign=3D"top">
+<span style=3D"font-size:10px;">Can't see this email? <span style=3D"color:=
+#727272;"><a class=3D"web-view" href=3D"https://trk.klclick.com/ls/click?up=
+n=3DHLAql0iz96NRcpo0AAu81vLl9AJtjjVBHjfE0tOcbVdNy7wFZJD4rtu6BznXZdlGyndgymV=
+Nlc5n2V2R9i0HWNgqkLXZ7k-2BcpWUszg6-2B2eL540ghxDUUMKF7DRMjQpxd6veNFUS54GPce1=
+OMpCUArPrYlAii47d7gek-2FhHckx2a-2BvmQ3xDjX027t8MoVG9FCilhpvvRkWyOCG0FA9lFj9=
+w-3D-3DTyoa_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEO=
+IM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vr=
+aagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByV=
+Q1S8xyIDalhebl9pIEfQRjRigpPhC9x-2FwsoCnujlcLKeo7gicvEznXazOPTtQQHcvx3lqiDNr=
+hqVqAyAwiCFCoEjV-2F-2BR8NXwqPIysk-2Fl9fYzB9Ww9LV6VD7RHuuc4LpSyVVZyHpGhAJ76o=
+MVNHUe3YxB9Kb6sL-2BzL7UHiTGha0PW6lSLO1gOKlniO8mVijwFlx2-2BbvlFyBBDmhA-3D-3D=
+">View in Your Browser</a></span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCo=
+llectionBlock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-t=
+able-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmButtonCollectionOuter">
+<tr>
+<td align=3D"center" class=3D"kmButtonCollectionInner" style=3D"border-coll=
+apse:collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; =
+min-width:60px; padding:9px 18px; padding-top:14px; padding-bottom:14px; ba=
+ckground-color:#FFF; padding-left:18; padding-right:18" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCo=
+llectionContentContainer" style=3D"border-collapse:collapse; mso-table-lspa=
+ce:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" style=3D"border-collapse:collapse; mso-table-lspace:0; m=
+so-table-rspace:0; table-layout:fixed">
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCollectionConte=
+nt" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace=
+:0; table-layout:fixed; font-family:&quot;Lucida Grande&quot;, &quot;Lucida=
+ Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, Verdana, sans-serif" =
+width=3D"100%">
+<tbody>
+<tr>
+<td style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace=
+:0; table-layout:fixed" valign=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"kmMobileNoAlign kmDesktopAutoWidth" style=3D"border-collapse:collaps=
+e; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; width:100%">
+<tbody><tr class=3D"kmDesktopOnly">
+<td colspan=3D"0" style=3D"border-collapse:collapse; mso-table-lspace:0; ms=
+o-table-rspace:0; table-layout:fixed; padding-bottom:1px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" st=
+yle=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; ta=
+ble-layout:fixed" width=3D"100%">
+<tbody><tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed">
+<a style=3D"max-width:100%; word-wrap:break-word" href=3D"https://trk.klcli=
+ck.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81gWeFY6m8fsKHpGXuCfgf153b-2B2Ir-2=
+FmkZjWS6fV-2BG7FHWgRsKyDDPfBbg4NVgCibifuP1H-2Fz4y8cnTTJiZbdu1Ilgewg5vTLL3GG=
+HCw9id6tsHcatO9VbQTxQof5vSa-2FoATehsX-2FllpdVvH1T5roUdm8tKu8JGsWrP67Xs0ZKO2=
+Z6jIq_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2F=
+u5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtn=
+NuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xy=
+IDalhebl0f8CnbGnzrqbHPlNkpX6FgufGPHy4TWQ4imiZC-2BMRzjNvv869QtjgZJPd8EEfM-2B=
+UU4N5ynt-2FGCtzkG5ldxUvENmI3sK8-2BBbXzEzW-2Bcge-2BCYR5m3g4w6CpDqtrYOGkiZI6r=
+OaZhQcKV-2FKlY-2FQPqN6149t8x4v-2FuUEGm0UOGAAnOdZHGeB5G-2FQ4gnQQ62u-2Bx-2FYw=
+-3D-3D">
+<img alt=3D"" src=3D"https://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/i=
+mages/bbf7c767-dec8-4649-a6d0-6dad0e3806c0.png" style=3D"border:0; height:a=
+uto; line-height:100%; max-width:100%; outline:none; text-decoration:none" =
+width=3D"120">
+</a>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr class=3D"kmMobileNoAlign" style=3D"font-size: 0;">
+<!--[if !mso]><!-->
+<td class=3D"kmMobileWrapHeaderDesktopNone kmMobileHeaderSpacing" style=3D"=
+border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; table-lay=
+out:fixed; display:none" valign=3D"middle">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" st=
+yle=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; ta=
+ble-layout:fixed">
+<tbody><tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed">
+<a style=3D"max-width:100%; word-wrap:break-word" href=3D"https://trk.klcli=
+ck.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81gWeFY6m8fsKHpGXuCfgf153b-2B2Ir-2=
+FmkZjWS6fV-2BG7FHWgRsKyDDPfBbg4NVgCibifuP1H-2Fz4y8cnTTJiZbdu1Ilgewg5vTLL3GG=
+HCw9id6tsHcatO9VbQTxQof5vSa-2FoATehsX-2FllpdVvH1T5roUdm8tKu8JGsWrP67Xs0ZKO2=
+Z8foA_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2F=
+u5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtn=
+NuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xy=
+IDalhebl09xMyNtm1CPYsdJIINPE-2FjyL9mCSpSSAUUi3Gu2hSYndtQfqL03s1yzNozAlWIkjq=
+i4HUVXIBDsFVcrbRXCg5pEfvbR8FEVIK-2By-2FjKXY6FxiuB9gw9YhtK-2FVV7zpPd8P7veGGY=
+rZStj2c07t54om2bWku69n-2FDMdT0j1I7u4eDIVo6piY7d-2BS0-2FLrG1gROo-2Fw-3D-3D">
+<img alt=3D"" src=3D"https://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/i=
+mages/bbf7c767-dec8-4649-a6d0-6dad0e3806c0.png" style=3D"border:0; height:a=
+uto; line-height:100%; max-width:100%; outline:none; text-decoration:none" =
+width=3D"120">
+</a>
+</td>
+</tr>
+</tbody></table>
+</td>
+<!--<![endif]-->
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmDividerB=
+lock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspa=
+ce:0; table-layout:fixed; background-color:#FFF" width=3D"100%">
+<tbody class=3D"kmDividerBlockOuter">
+<tr>
+<td class=3D"kmDividerBlockInner kmMobileStretch" style=3D"border-collapse:=
+collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; paddi=
+ng-top:0; padding-bottom:0; padding-left:0; padding-right:0">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmDividerC=
+ontent" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rs=
+pace:0; table-layout:fixed; border-top-width:6px; border-top-style:solid; b=
+order-top-color:#47E4C2" width=3D"100%">
+<tbody>
+<tr><td style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rs=
+pace:0; table-layout:fixed"><span></span></td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<!--[if !mso]><!-->
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmDividerB=
+lock kmMobileOnly" style=3D"border-collapse:collapse; mso-table-lspace:0; m=
+so-table-rspace:0; table-layout:fixed; display:none" width=3D"100%">
+<tbody class=3D"kmDividerBlockOuter">
+<tr>
+<td class=3D"kmDividerBlockInner" style=3D"border-collapse:collapse; mso-ta=
+ble-lspace:0; mso-table-rspace:0; table-layout:fixed; padding-top:20px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmDividerC=
+ontent" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rs=
+pace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr><td style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rs=
+pace:0; table-layout:fixed"><span></span></td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--<![endif]-->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft firstColumn" style=3D"border-collapse=
+:collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed" vali=
+gn=3D"top" width=3D"50%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmImageBlo=
+ck kmDesktopOnly" style=3D"border-collapse:collapse; mso-table-lspace:0; ms=
+o-table-rspace:0; table-layout:fixed; min-width:100%" width=3D"100%">
+<tbody class=3D"kmImageBlockOuter">
+<tr>
+<td class=3D"kmImageBlockInner" style=3D"border-collapse:collapse; mso-tabl=
+e-lspace:0; mso-table-rspace:0; table-layout:fixed; padding:0; padding-left=
+:15px; padding-right:15px; padding-top:18px; padding-bottom:18px" valign=3D=
+"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmImageContentContainer" style=3D"border-collapse:collapse; mso-table-=
+lspace:0; mso-table-rspace:0; table-layout:fixed; min-width:100%" width=3D"=
+100%">
+<tbody>
+<tr>
+<td class=3D"kmImageContent" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed; font-size:0; padding:0" va=
+lign=3D"top">
+<a style=3D"max-width:100%; word-wrap:break-word" target=3D"_self" href=3D"=
+https://trk.klclick.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEzn=
+GlON6tIgZBctZPhM1u6HSw9-2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLy=
+Zr0ChD-2F1Cxd9Wb2WBs8KFLl-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEb=
+UNcGw45ShqmaMr-2FBAsfwbCAYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3DEUqB_UXU8vSzu=
+g-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2=
+BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2Kyo=
+Xz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl9aeNfx=
+-2F5F7lgD-2BS2SBfOIZ-2FTYO8vUxyRzwekZytpnAE4xAwVMloMTFl-2FrJhy6KdY1BjSLJp2F=
+x4iaX820WgW1F1qMMEwpXFbmWOtaDt4-2F9IUJ0dOYWtlP4B1r3YdCf1QIYzoQ9-2FgbhG9fX91=
+nyjDmSdmUDfnb3xMtUalh96kDH8TWytqTaZsJwY-2FhhQxzcJLw-3D-3D">
+<img align=3D"left" alt=3D"user based insurance illustration" class=3D"kmIm=
+age" src=3D"https://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/images/cd3=
+d02ce-b264-4354-98e6-6270b10c22f3.png" style=3D"border:0; height:auto; line=
+-height:100%; max-width:274px; outline:none; text-decoration:none; margin-r=
+ight:0; font-size:12px; padding-bottom:0; vertical-align:top; width:100%; d=
+isplay:inline; padding:0; border-width:0" width=3D"270">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class=3D"rowContainer kmFloatLeft lastColumn" style=3D"border-collapse:=
+collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valig=
+n=3D"top" width=3D"50%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#222; font-family:&qu=
+ot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&=
+quot;, Geneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; line-=
+height:1.3; max-width:100%; text-align:center; word-wrap:break-word; paddin=
+g-top:9px; padding-bottom:9px; padding-left:0; padding-right:0" valign=3D"t=
+op">
+<span style=3D"font-family:arial black,arial,sans-serif;"><span style=3D"fo=
+nt-size:36px;"><strong>Usage-Based<br>
+Car Insurance</strong></span></span><br>
+<span style=3D"font-family:arial,helvetica,sans-serif;"><span style=3D"font=
+-size:30px;">Can Be Rewarding</span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBl=
+ock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspac=
+e:0; table-layout:fixed; width:100%" width=3D"100%">
+<tbody class=3D"kmButtonBlockOuter">
+<tr>
+<td align=3D"center" class=3D"kmButtonBlockInner" style=3D"border-collapse:=
+collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; min-w=
+idth:60px; padding:9px 18px; padding-top:9; padding-bottom:10px; padding-le=
+ft:18; padding-right:18" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCo=
+ntentContainer" style=3D"border-collapse:separate; mso-table-lspace:0; mso-=
+table-rspace:0; table-layout:fixed; background-color:#FF6700; border-bottom=
+-left-radius:5px; border-bottom-right-radius:5px; border-top-left-radius:5p=
+x; border-top-right-radius:5px; border-radius:4px; border-bottom-color:#EAE=
+AEA; border-bottom-width:2px; border-bottom-style:solid" width=3D"">
+<tbody>
+<tr>
+<!--[if !mso]><!-->
+<td align=3D"center" class=3D"kmButtonContent" style=3D"border-collapse:col=
+lapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; color:#F=
+FF; font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, G=
+eneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; font-weight:b=
+old" valign=3D"middle">
+<a class=3D"kmButton" style=3D"max-width:100%; color:#FFF; font-family:&quo=
+t;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, Verdana, sans=
+-serif; font-size:16px; font-weight:bold; line-height:100%; text-align:cent=
+er; text-decoration:none; word-wrap:break-word; display:inline-block; paddi=
+ng-top:18px; padding-bottom:18px; letter-spacing:0; padding-left:30px; padd=
+ing-right:30px" target=3D"_self" title=3D"" href=3D"https://trk.klclick.com=
+/ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9=
+-2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KF=
+Ll-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwb=
+CAYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3DqMqU_UXU8vSzug-2FEl8HdHmODEoM134VulZ=
+tE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTL=
+iwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1=
+CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl6j3Qjby-2BqUSwN0ABH847ZAgSfNb=
+9Mx3ibgQjIZkhKl-2BzYNd7Pvs0Bbx-2BUr00NyJ6t-2FZ1sp7CI7TOX2l1Tlca3ETq8BwL3uBU=
+WC1KaHWcD51KxDguSqXjm8fnSU-2BHAYtaMuGR14ygoPv4xRDM-2BFW1Ffc88JUtmSq3LAeks-2=
+FW4lx0hU-2FpopplQnCnnGTCc-2BE1jA-3D-3D">PAY LESS FOR COVERAGE</a>
+</td>
+<!--<![endif]-->
+<!--[if mso]>
+<td align=3D"center" valign=3D"middle" class=3D"kmButtonContent"
+  style=3D"padding:15px; padding-top:18px;padding-bottom:18px;font-size:16p=
+x;color:#FFFFFF;letter-spacing:0px;font-weight:bold;padding-left:30px;paddi=
+ng-right:30px;font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida San=
+s&quot;, Geneva, Verdana, sans-serif;;">
+  <a class=3D"kmButton" title=3D"" target=3D"_self" style=3D"text-decoratio=
+n:none;padding-top:18px;padding-bottom:18px;font-size:16px;color:#FFFFFF;le=
+tter-spacing:0px;font-weight:bold;padding-left:30px;padding-right:30px;font=
+-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, V=
+erdana, sans-serif;;; margin-top:-18px;margin-bottom:-18px;margin-left:-30p=
+x;margin-right:-30px;" href=3D"https://trk.klclick.com/ls/click?upn=3DHLAql=
+0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9-2Bd1gHy5taZ5Nj33-2Fi=
+bUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KFLl-2Bcw6qvxg4l3H9Bzbo=
+pLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwbCAYkpOSijy3DflWGv8lXG=
+c9uKTzYjzqT4dXk-3DymTT_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz80=
+3qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfT=
+VJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm=
+2w0fSsnLByVQ1S8xyIDalhebl0JbRm6oBwFHfEdbL4oyItz7VK7AJ40eU6OAQGbhiU-2Fdp-2BO=
+ppIpKwIkfRmAwk3rooS62szjaZvwoRN4nzYPTT4OCPQeFQwMhZSvvEa-2B9XG19cef7yyeEcGhR=
+clzXoCflqEbDXzF1RnPMS39u67cb7CgDGkHGCL8OKOIC-2FqItxG-2BVvgrMmo08S7FdRyYkGIW=
+wzA-3D-3D">PAY LESS FOR COVERAGE</a>
+</td>
+<![endif]-->
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<!--[if !mso]><!-->
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmImageBlo=
+ck kmMobileOnly" style=3D"border-collapse:collapse; mso-table-lspace:0; mso=
+-table-rspace:0; table-layout:fixed; display:none; min-width:100%" width=3D=
+"100%">
+<tbody class=3D"kmImageBlockOuter">
+<tr>
+<td class=3D"kmImageBlockInner" style=3D"border-collapse:collapse; mso-tabl=
+e-lspace:0; mso-table-rspace:0; table-layout:fixed; padding:0; padding-left=
+:0; padding-right:0; padding-top:20px" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmImageContentContainer" style=3D"border-collapse:collapse; mso-table-=
+lspace:0; mso-table-rspace:0; table-layout:fixed; min-width:100%" width=3D"=
+100%">
+<tbody>
+<tr>
+<td class=3D"kmImageContent" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed; font-size:0; padding:0; te=
+xt-align:center" valign=3D"top">
+<a style=3D"max-width:100%; word-wrap:break-word" target=3D"_self" href=3D"=
+https://trk.klclick.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEzn=
+GlON6tIgZBctZPhM1u6HSw9-2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLy=
+Zr0ChD-2F1Cxd9Wb2WBs8KFLl-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEb=
+UNcGw45ShqmaMr-2FBAsfwbCAYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3Dz8l9_UXU8vSzu=
+g-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2=
+BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2Kyo=
+Xz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl-2BjM2=
+h10VOS6kkBrVmr3YsaugG-2FmZybfzV5eNuBGUu0lsgO42XbzU9xFTpot4Y4-2FV1TMks-2FPp-=
+2Fb5YeROze3nJk2-2BOdJV5Lq74dTFTNK97umYbYgb3KNG8r37e6HU6BKv-2FeYeMZrW925PoXb=
+xM2gWC3RhDxXTUq3gqr8FX54mgAjtDKhgz9-2FVejzo9Eqo8crRtQ-3D-3D">
+<img align=3D"center" alt=3D"user based insurance illustration" class=3D"km=
+Image" src=3D"https://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/images/c=
+d3d02ce-b264-4354-98e6-6270b10c22f3.png" style=3D"border:0; height:auto; li=
+ne-height:100%; max-width:274px; outline:none; text-decoration:none; font-s=
+ize:12px; padding-bottom:0; vertical-align:top; width:100%; display:inline;=
+ padding:0; border-width:0" width=3D"274">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--<![endif]-->
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#222; font-family:&qu=
+ot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&=
+quot;, Geneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; line-=
+height:1.3; max-width:100%; text-align:left; word-wrap:break-word; padding-=
+top:29px; padding-bottom:29px; padding-left:61px; padding-right:61px" valig=
+n=3D"top">
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em"><span style=3D"font-size:16px;">Hey Benjamin,</span></p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:0"><span style=3D"font-size:16px;">Usage-based insurance (aka=
+ low-mileage) allows you to reduce expenses relative to driving history. Th=
+is means you can pay less for car insurance based on how and when you drive=
+. But before acquiring usage-based insurance, you should always explore you=
+r options.</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBl=
+ock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspac=
+e:0; table-layout:fixed; width:100%" width=3D"100%">
+<tbody class=3D"kmButtonBlockOuter">
+<tr>
+<td align=3D"center" class=3D"kmButtonBlockInner" style=3D"border-collapse:=
+collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; min-w=
+idth:60px; padding:9px 18px; padding-top:9; padding-bottom:30px; padding-le=
+ft:18px; padding-right:18px" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCo=
+ntentContainer" style=3D"border-collapse:separate; mso-table-lspace:0; mso-=
+table-rspace:0; table-layout:fixed; background-color:#FF6700; border-bottom=
+-left-radius:5px; border-bottom-right-radius:5px; border-top-left-radius:5p=
+x; border-top-right-radius:5px; border-radius:4px; border-bottom-color:#EAE=
+AEA; border-bottom-width:2px; border-bottom-style:solid" width=3D"">
+<tbody>
+<tr>
+<!--[if !mso]><!-->
+<td align=3D"center" class=3D"kmButtonContent" style=3D"border-collapse:col=
+lapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; color:#F=
+FF; font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, G=
+eneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; font-weight:b=
+old" valign=3D"middle">
+<a class=3D"kmButton" style=3D"max-width:100%; color:#FFF; font-family:&quo=
+t;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, Verdana, sans=
+-serif; font-size:16px; font-weight:bold; line-height:100%; text-align:cent=
+er; text-decoration:none; word-wrap:break-word; display:inline-block; paddi=
+ng-top:18px; padding-bottom:18px; letter-spacing:0; padding-left:30px; padd=
+ing-right:30px" target=3D"_self" title=3D"" href=3D"https://trk.klclick.com=
+/ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9=
+-2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KF=
+Ll-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwb=
+CAYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3DbgVS_UXU8vSzug-2FEl8HdHmODEoM134VulZ=
+tE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTL=
+iwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1=
+CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl5iG6s9mFGngX89Cq56OpBk2c7rXMX=
+XVMhkS8XhMN7-2FmCbxkfmS-2Byk2PU31GgHh0tgdt7GD9VBfS6BkBRlSjSd99zbMbwqU4vYafW=
+2J25MbtHFebdYuuot-2Bmh0-2Bmb-2FDqGdH6cGl94G8TeMNGNTdm42ofKpJ7kp0gvbn9g6yhyn=
+FIF4-2BdzPuzbB2rmaxwhb1Y6A-3D-3D">FIND CHEAPER INSURANCE</a>
+</td>
+<!--<![endif]-->
+<!--[if mso]>
+<td align=3D"center" valign=3D"middle" class=3D"kmButtonContent"
+  style=3D"padding:15px; padding-top:18px;padding-bottom:18px;font-size:16p=
+x;color:#FFFFFF;letter-spacing:0px;font-weight:bold;padding-left:30px;paddi=
+ng-right:30px;font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida San=
+s&quot;, Geneva, Verdana, sans-serif;;">
+  <a class=3D"kmButton" title=3D"" target=3D"_self" style=3D"text-decoratio=
+n:none;padding-top:18px;padding-bottom:18px;font-size:16px;color:#FFFFFF;le=
+tter-spacing:0px;font-weight:bold;padding-left:30px;padding-right:30px;font=
+-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, V=
+erdana, sans-serif;;; margin-top:-18px;margin-bottom:-18px;margin-left:-30p=
+x;margin-right:-30px;" href=3D"https://trk.klclick.com/ls/click?upn=3DHLAql=
+0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9-2Bd1gHy5taZ5Nj33-2Fi=
+bUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KFLl-2Bcw6qvxg4l3H9Bzbo=
+pLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwbCAYkpOSijy3DflWGv8lXG=
+c9uKTzYjzqT4dXk-3DV4FQ_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz80=
+3qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfT=
+VJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm=
+2w0fSsnLByVQ1S8xyIDalheblxMurzqatKqNFMjkmQA73mK7xIz0-2BAVPrwA-2B-2Bp5ZS5CRu=
+p0VtyqUteJQPSCduMZ1-2F4RBBjQnYAzUI5-2BsH41naUOESi4nqMsC6-2BCkrH2plU0yWGjMwt=
+gyrP-2FqYVt6bkd2OmCzBmPcSRFg58yyILuAMgjhhjsr82EHXM5rmsVFy7as5kOUQJu8LsQRBsw=
+AJsXoWA-3D-3D">FIND CHEAPER INSURANCE</a>
+</td>
+<![endif]-->
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed; background-color:#F3F7FF=
+" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#222; font-family:&qu=
+ot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&=
+quot;, Geneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; line-=
+height:1.3; max-width:100%; text-align:left; word-wrap:break-word; padding-=
+top:41px; padding-bottom:19px; padding-left:61px; padding-right:61px" valig=
+n=3D"top">
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em">Driving safer makes you less risky to insurance provider=
+s. So when you drive less and practice good behavior on the road, you can e=
+njoy reduced rates.</p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em">Your provider may actively track your driving habits to =
+ensure you qualify. This is usually done through GPS and an app. So by not =
+speeding, not texting while driving, and not cruising late at night, you ca=
+n save on insurance. Plus there are other things you can practice to pay ev=
+en less.</p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em">It's also easy to lower your mileage and further increas=
+e your chances of saving. You can start by using public transport or hire a=
+ rideshare service. Walking, working from home, or riding a bike are also v=
+iable alternatives.</p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:0">But ensuring your usage-based policy covers only what you =
+need and nothing more can be a win. The most convenient way to do this is b=
+y using <a style=3D"max-width:100%; color:#2980B9; font-weight:bold; text-d=
+ecoration:underline; word-wrap:break-word" href=3D"https://trk.klclick.com/=
+ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9-=
+2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KFL=
+l-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwbC=
+AYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3Dt_PK_UXU8vSzug-2FEl8HdHmODEoM134VulZt=
+E7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLi=
+wWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1C=
+atoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl7eDmWy0gCuD3qnMLiYS0lmuR-2BlQn=
+VkekC1dLR89pORAzftEYPPuBPDouXfCde788YC-2BlHK6QGBn1yOfPUejve7aeTQb4F-2FXFCBb=
+I7AU9TTzI1XY1Dl-2FrlbzReOG8UG9rKlATyCqeS9jVsymM9G0ltILYhVYc54ebLCMnbSfScEOS=
+JF0V-2FFr173HUgpKPh6HvA-3D-3D"><strong>Insurify</strong></a> to compare the=
+ best rates nationwide.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBl=
+ock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspac=
+e:0; table-layout:fixed; width:100%" width=3D"100%">
+<tbody class=3D"kmButtonBlockOuter">
+<tr>
+<td align=3D"center" class=3D"kmButtonBlockInner" style=3D"border-collapse:=
+collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; min-w=
+idth:60px; padding:9px 18px; padding-top:9; padding-bottom:40px; padding-le=
+ft:18px; padding-right:18px; background-color:#F3F7FF" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonCo=
+ntentContainer" style=3D"border-collapse:separate; mso-table-lspace:0; mso-=
+table-rspace:0; table-layout:fixed; background-color:#FF6700; border-bottom=
+-left-radius:5px; border-bottom-right-radius:5px; border-top-left-radius:5p=
+x; border-top-right-radius:5px; border-radius:4px; border-bottom-color:#EAE=
+AEA; border-bottom-width:2px; border-bottom-style:solid" width=3D"">
+<tbody>
+<tr>
+<!--[if !mso]><!-->
+<td align=3D"center" class=3D"kmButtonContent" style=3D"border-collapse:col=
+lapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; color:#F=
+FF; font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, G=
+eneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; font-weight:b=
+old" valign=3D"middle">
+<a class=3D"kmButton" style=3D"max-width:100%; color:#FFF; font-family:&quo=
+t;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, Verdana, sans=
+-serif; font-size:16px; font-weight:bold; line-height:100%; text-align:cent=
+er; text-decoration:none; word-wrap:break-word; display:inline-block; paddi=
+ng-top:18px; padding-bottom:18px; letter-spacing:0; padding-left:30px; padd=
+ing-right:30px" target=3D"_self" title=3D"" href=3D"https://trk.klclick.com=
+/ls/click?upn=3DHLAql0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9=
+-2Bd1gHy5taZ5Nj33-2FibUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KF=
+Ll-2Bcw6qvxg4l3H9BzbopLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwb=
+CAYkpOSijy3DflWGv8lXGc9uKTzYjzqT4dXk-3Dmv2a_UXU8vSzug-2FEl8HdHmODEoM134VulZ=
+tE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTL=
+iwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1=
+CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhebl4jdfB29MPcsehBnblYBQkM5dh2zua=
+L25MWZwnqAPAqlORv4z2CL-2FpoP7Xmd8SXWGHJRwowLfGeHzK19pkl8tbbikXY7BnxoGQIuboz=
+9Xh5zvop6lU-2B-2FIowFsZ1qhdKnI-2BVuVe6I1NRAUjPBlnteJ7fGYMqd0xFu0B0CToPS4UqS=
+JKG-2Bq8egp011jpug7a08ww-3D-3D">COMPARE RATES</a>
+</td>
+<!--<![endif]-->
+<!--[if mso]>
+<td align=3D"center" valign=3D"middle" class=3D"kmButtonContent"
+  style=3D"padding:15px; padding-top:18px;padding-bottom:18px;font-size:16p=
+x;color:#FFFFFF;letter-spacing:0px;font-weight:bold;padding-left:30px;paddi=
+ng-right:30px;font-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida San=
+s&quot;, Geneva, Verdana, sans-serif;;">
+  <a class=3D"kmButton" title=3D"" target=3D"_self" style=3D"text-decoratio=
+n:none;padding-top:18px;padding-bottom:18px;font-size:16px;color:#FFFFFF;le=
+tter-spacing:0px;font-weight:bold;padding-left:30px;padding-right:30px;font=
+-family:&quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, V=
+erdana, sans-serif;;; margin-top:-18px;margin-bottom:-18px;margin-left:-30p=
+x;margin-right:-30px;" href=3D"https://trk.klclick.com/ls/click?upn=3DHLAql=
+0iz96NRcpo0AAu81pOlVRqKFDi5sEznGlON6tIgZBctZPhM1u6HSw9-2Bd1gHy5taZ5Nj33-2Fi=
+bUfBlX55W7cIcSch0JVcLHJ1heHKeLyZr0ChD-2F1Cxd9Wb2WBs8KFLl-2Bcw6qvxg4l3H9Bzbo=
+pLEpiLKSPnWGks5WQtwB9A96apYjrEbUNcGw45ShqmaMr-2FBAsfwbCAYkpOSijy3DflWGv8lXG=
+c9uKTzYjzqT4dXk-3D9Y5e_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz80=
+3qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfT=
+VJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm=
+2w0fSsnLByVQ1S8xyIDalheblw53OvrGqmWHXnxtj4IEiXTxje-2BtK0YTCHXMUbrYka6ZkKJ4d=
+ARyMJKP4Q-2Fi4-2F2j4WXofgXZ5KDj8L0QEzqUT4VD-2BuUBa4wjmhdqOYIXwrMzV8oIHIug8Z=
+QJnrUOLA1oE9gDYv-2B60ygxIp36pP9K4FJ486AbF7M784pkUY1n9VHoPAHwEfckB3BFv13Zgi-=
+2FBgA-3D-3D">COMPARE RATES</a>
+</td>
+<![endif]-->
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed; background-color:#F3F7FF=
+" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#222; font-family:&qu=
+ot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&=
+quot;, Geneva, Verdana, sans-serif; font-size:16px; letter-spacing:0; line-=
+height:1.3; max-width:100%; text-align:left; word-wrap:break-word; padding-=
+top:0; padding-bottom:45px; padding-left:61px; padding-right:61px" valign=
+=3D"top">
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:0">To better pricing,<br>
+=E2=80=8B<strong>The Insurify Team</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmImageBlo=
+ck" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace=
+:0; table-layout:fixed; min-width:100%" width=3D"100%">
+<tbody class=3D"kmImageBlockOuter">
+<tr>
+<td class=3D"kmImageBlockInner" style=3D"border-collapse:collapse; mso-tabl=
+e-lspace:0; mso-table-rspace:0; table-layout:fixed; padding:9px; padding-to=
+p:22px; padding-right:9; background-color:#0C1920; padding-left:9" valign=
+=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmImageContentContainer" style=3D"border-collapse:collapse; mso-table-=
+lspace:0; mso-table-rspace:0; table-layout:fixed; min-width:100%" width=3D"=
+100%">
+<tbody>
+<tr>
+<td class=3D"kmImageContent" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed; font-size:0; padding:0; pa=
+dding-top:0; padding-bottom:0; padding-left:9px; padding-right:9px; text-al=
+ign:center" valign=3D"top">
+<a style=3D"max-width:100%; word-wrap:break-word" target=3D"_self" href=3D"=
+https://trk.klclick.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81gWeFY6m8fsKHpGX=
+uCfgf153b-2B2Ir-2FmkZjWS6fV-2BG7FHWgRsKyDDPfBbg4NVgCibifuP1H-2Fz4y8cnTTJiZb=
+du1Ilgewg5vTLL3GGHCw9id6tsHcatO9VbQTxQof5vSa-2FoATehsX-2FllpdVvH1T5roUdm8tK=
+u8JGsWrP67Xs0ZKO2ZHdZB_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz80=
+3qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfT=
+VJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm=
+2w0fSsnLByVQ1S8xyIDalheblxQyZezVB5-2FNa8oL5YP6BNd5k8lGJzKgmMS-2FB9aS2GSYs6Z=
+JzyxPjrqKQO0xmoZrubNWeKTmOhHxcRoR22lu3zBgxvy8NEFJurgOoBtO6xCkqdFsIU8EASyM1X=
+vvjWF7NKRbJIoDbpy0mxiJmrjcFpXcOT4Y3gvfAoNLqc-2BbcktiqMQl3Sqyrw4NlXSXwRkH6Q-=
+3D-3D">
+<img align=3D"center" alt=3D"INSURIFY" class=3D"kmImage" src=3D"https://d3k=
+81ch9hvuctc.cloudfront.net/company/MBFjw3/images/05e0d7f6-1abf-4445-a905-f2=
+f5fcde3be8.png" style=3D"border:0; height:auto; line-height:100%; max-width=
+:80px; outline:none; text-decoration:none; font-size:12px; padding-bottom:0=
+; vertical-align:top; width:100%; display:inline; padding:0; border-width:0=
+; background-color:#0C1920" width=3D"80">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#FDFDFD; font-family:=
+&quot;Lucida Grande&quot;, Lucida; font-size:10px; letter-spacing:0; line-h=
+eight:1.3; max-width:100%; text-align:center; word-wrap:break-word; padding=
+-right:18px; padding-bottom:20px; font-weight:normal; padding-left:18px; pa=
+dding-top:20px; background-color:#0C1920" valign=3D"top">
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em; text-align:center"><span style=3D"font-family: &quot;luc=
+ida grande&quot;, sans-serif; font-size: 14px;">Insurify, Inc</span></p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em; text-align:center"><span style=3D"font-size:14px;"><span=
+ style=3D"font-family:lucida grande,sans-serif;">245 Main Street 11th Floor=
+ Cambridge, MA 02142</span></span><span style=3D"font-family: &quot;lucida =
+grande&quot;, sans-serif; font-size: 12px;"></span></p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:1em; text-align:center">&nbsp;</p>
+<p style=3D"margin-bottom:0; margin-left:0; margin-right:0; margin-top:0; p=
+adding-bottom:0; text-align:center"><span style=3D"font-family:lucida grand=
+e,sans-serif;"><span style=3D"font-size:12px;"><span style=3D"color: rgb(25=
+3, 253, 253);">=C2=A9 2013-2022 Insurify, Inc. All rights reserved. Insurif=
+y Insurance Agency is a licensed</span><span style=3D"color: rgb(253, 253, =
+253);">&nbsp;insurance agency in 50 states.</span></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBa=
+rBlock" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rs=
+pace:0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmButtonBarOuter">
+<tr>
+<td align=3D"center" class=3D"kmButtonBarInner" style=3D"border-collapse:co=
+llapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; padding=
+-top:0; padding-bottom:20px; background-color:#0C1920; padding-left:9px; pa=
+dding-right:9px" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBa=
+rContentContainer" style=3D"border-collapse:collapse; mso-table-lspace:0; m=
+so-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed; padding-left:9px; padding-right:9p=
+x">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmButtonBa=
+rContent" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-=
+rspace:0; table-layout:fixed; font-family:&quot;Lucida Grande&quot;, &quot;=
+Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, Geneva, Verdana, sans-s=
+erif">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-col=
+lapse:collapse; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed"=
+>
+<tbody>
+<tr>
+<td style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace=
+:0; table-layout:fixed" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rsp=
+ace:0; table-layout:fixed">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed; padding-right:10px" valign=3D"top"=
+>
+<a style=3D"max-width:100%; word-wrap:break-word" target=3D"_blank" href=3D=
+"https://trk.klclick.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81n1DLLcjfQkehTl=
+52TgJu12OX3-2BGHipiDWmgiOo34wtaACvOzX447fK5c-2BGrHZ7vMOQqP-2BsNh-2F5amzgzvP=
+GEtq9NPnCZk8QiwRAVImU-2FldlibloJVygU6C2LxaQglZ-2BIcHJD9Fa3Sl3zqU2QjH90Nl5Bm=
+QEhMAPmM946F8ryC5Fsa9wn_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz8=
+03qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIf=
+TVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bN=
+m2w0fSsnLByVQ1S8xyIDalhebl-2Bzjnmodcqz2v3usbGBktmDmMtOIZsd7HlG0m1JNL2Kn6xUm=
+kKUD-2F3iA8B5Twj7MdIsHIoJRNLF8N2D2tnrSRUUtSORYsS6oxCiOC-2Fi90sKCUH37dlEeYUR=
+vT6qQjJJH9BjycrpOgpf-2FXMe63TAorXG0mgnH8QZfHFlJ66iKZKbd8xyaRG-2FRy4-2F665bB=
+QJ1Uag-3D-3D"><img alt=3D"Facebook" class=3D"kmButtonBlockIcon" src=3D"http=
+s://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/images/f8fc89a0-abf3-4b39-=
+98eb-12f729ba4db9.png?v=3D0" style=3D"border:0; height:auto; line-height:10=
+0%; max-width:100%; outline:none; text-decoration:none; width:40pxpx; displ=
+ay:block" width=3D"40"></a>
+</td>
+</tr>
+</tbody>
+</table>
+<!--[if gte mso 6]></td><td align=3D"left" valign=3D"top"><![endif]-->
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rsp=
+ace:0; table-layout:fixed">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<a style=3D"max-width:100%; word-wrap:break-word" target=3D"_blank" href=3D=
+"https://trk.klclick.com/ls/click?upn=3DHLAql0iz96NRcpo0AAu81khQ4Ph2ZaO39Re=
+J-2BpedJhlVExoa8nqJ-2BR-2FsDhPMKr5N63DwCLbe3B-2F7fmtk1j6Iz3jnwCBs-2Bg6WBCew=
+mjyfyGlqrVKnHLAqF3ErrWLWVbm53zA0M4QkkK30Npeg8IHQ00zDwubMl6FPRaf6LCP4JzjV3sv=
+zi-2FCOgi6AkvEQs1h2P-bd_UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz8=
+03qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIf=
+TVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bN=
+m2w0fSsnLByVQ1S8xyIDalheblwhMsstv27VWd-2BICmJ2u7OTbhe8eQQ9N6vo9HeuNOj8vO4CR=
+N-2Bd34Px1kjZYhJ09p9MZHtRfTzdHZ-2B2lxVcX8-2Fp4aKhYhxv2nqWYE23-2Flri94Vo3US3=
+4b3xkXMYm3Y4ULgP8Zl8s2XZ33wVWbSMHO7o6nuhYlrw-2BB-2F-2FEP7-2FLGf7Ga4lcx42bEl=
+rkGJUyuwA5GA-3D-3D"><img alt=3D"Twitter" class=3D"kmButtonBlockIcon" src=3D=
+"https://d3k81ch9hvuctc.cloudfront.net/company/MBFjw3/images/4f506db6-3463-=
+4a57-a97f-f28ea19d0922.png?v=3D0" style=3D"border:0; height:auto; line-heig=
+ht:100%; max-width:100%; outline:none; text-decoration:none; width:40pxpx; =
+display:block" width=3D"40"></a>
+</td>
+</tr>
+</tbody>
+</table>
+<!--[if gte mso 6]></td><td align=3D"left" valign=3D"top"><![endif]-->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"border-collapse:collapse; mso-table-lspace:0;=
+ mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"templateRo=
+w" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"rowContainer kmFloatLeft" style=3D"border-collapse:collapse; m=
+so-table-lspace:0; mso-table-rspace:0; table-layout:fixed" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"kmTextBloc=
+k" style=3D"border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:=
+0; table-layout:fixed" width=3D"100%">
+<tbody class=3D"kmTextBlockOuter">
+<tr>
+<td class=3D"kmTextBlockInner" style=3D"border-collapse:collapse; mso-table=
+-lspace:0; mso-table-rspace:0; table-layout:fixed; background-color:#0C1920=
+" valign=3D"top">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"kmTextContentContainer" style=3D"border-collapse:collapse; mso-table-l=
+space:0; mso-table-rspace:0; table-layout:fixed" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"kmTextContent" style=3D"border-collapse:collapse; mso-table-ls=
+pace:0; mso-table-rspace:0; table-layout:fixed; color:#727272; font-family:=
+&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sa=
+ns&quot;, Geneva, Verdana, sans-serif; font-size:12px; letter-spacing:0; li=
+ne-height:1.3; max-width:100%; text-align:center; word-wrap:break-word; pad=
+ding-bottom:20px; padding-right:18px; padding-left:18px; padding-top:9px" v=
+align=3D"top">
+<span style=3D"font-family:lucida,sans-serif;"><span style=3D"font-size:10p=
+x; "><em><span style=3D"color:#A1A1A1;">No longer want to receive these ema=
+ils? </span><strong><u><a href=3D"https://trk.klclick.com/ls/click?upn=3DHL=
+Aql0iz96NRcpo0AAu81vLl9AJtjjVBHjfE0tOcbVdNy7wFZJD4rtu6BznXZdlGU70ynmyRgPOaU=
+jUxkBGomp1pOzV37qIZ5eOi1dpoepMX8es0RYGYmPpPbQnc3YxXxURj-2FbeZzJll7dh8KLx3ma=
+33a08elmgN73BdafqnBlGWbT7gV3Az4n2WSkwaHWwfvt6gmMxzQ6YSqwOsJaD4fA-3D-3DY3hn_=
+UXU8vSzug-2FEl8HdHmODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAO=
+yviRpu-2BJDVoic4yg6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n=
+8PHR2KyoXz9CywEtT8cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalhe=
+blzJAfPvRU3cVgnGyiCoU2dOAr0uB6xPm7DWJQVpUSg-2BPLuSfi2d-2B66xKERvqSfseS1ZPS0=
+fKmFhv9SqzgMLsK7c8Izy9-2BQUhPwtdoJN4nZuNKL2i1s1zNh2VfkZMq8UE19zyDSpWHfC93FD=
+otdwPp88FF6-2Bip3lSIM6visg2FbrcDuKiJbsEC0GDcYNQrkzSiw-3D-3D" style=3D"max-w=
+idth:100%; color:#727272; font-weight:bold; text-decoration:underline; word=
+-wrap:break-word"><span style=3D"color:#A1A1A1;">Unsubscribe</span></a></u>=
+</strong><span style=3D"color:#A1A1A1;"> or&nbsp;</span><u><strong><a href=
+=3D"https://trk.klclick.com/ls/click?upn=3DZuk4hszFKhcslaruTGZv2-2Fm4L8bNFS=
+JFsLwLjZHwFCq6yaN83s1WzhSuje5vyZHr4fHiyhKJF3U-2B11-2FYHLMzjFW55YXxYhS-2BgM7=
+KExU15FoA72Q6ss4pW3CdZ-2Bt0Uuahfk0h0hFT9Zfr9rXaVSaYcLxWfdRh52-2FsRmmVGdc4S3=
+DESoMfIDHzMVch7ABAV6FJHSH2tOv-2FNBkUseaUPHIrKA-3D-3DkDM8_UXU8vSzug-2FEl8HdH=
+mODEoM134VulZtE7Kh-2F-2FA3GzOghz803qY69qjymEOIM9-2Fu5wkAOyviRpu-2BJDVoic4yg=
+6-2Bv05xf0QTLiwWzUxu59by-2BDGpXIfTVJQfh2822vraagKtnNuYU1n8PHR2KyoXz9CywEtT8=
+cBS8OuBCRw8U1CatoN9QnAgBelSg180bNm2w0fSsnLByVQ1S8xyIDalheblzszpiKnN-2FNhGnR=
+Is-2FNQtuRGTCei5FjYUojxgVoCPvAtwra7S-2BCSZDlotJZoGMQVY4BgaHFNRrhCu7nhg-2F6l=
+4yw-2B46DvuQZMY-2FAB1HOluRjksnnxdD2iYyNs8GUxPafEOMzAB7shg-2FGj2o76qLw9kLzBe=
+6HT0tvev9VRxJpc2Q-2BCyUz-2BNOeFCEZf88uu-2FdNtRA-3D-3D" style=3D"max-width:1=
+00%; color:#727272; font-weight:bold; text-decoration:underline; word-wrap:=
+break-word"><span style=3D"color:#A1A1A1;">Manage Your Preferences</span></=
+a><span style=3D"color:#A1A1A1;">.</span></strong></u></em></span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+<!--[if !mso]><!-->
+</div>
+</div>
+<div style=3D"display:none !important;visibility:hidden;mso-hide:all;font-s=
+ize:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:=
+0;overflow:hidden;">=E2=80=8C</div>
+<!--<![endif]-->
+<!--[if mso]>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <![endif]-->
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+
+<img src=3D"https://trk.klclick.com/wf/open?upn=3Dejvx1vKpFLGbKON5DdZyOCh9p=
+juFGcUCguIgVokhOhIlfu6NQYbwQpWyZZcLAZEv-2FBDmbjosLH-2FJENbCEQ7-2BNjL-2BMK9A=
+HVFpDnxf9ee0k4QQZvcnztEwyoURNR7HsGdzZF54gj13OR-2FK-2BsuVv-2FK3N6SpIC72EM9r5=
+ZdcWxfCFnHGYcUNKzwGtVeUtt1z3oqIY1FU7oZolWVWle5oivovQYL-2FCoPcf1RRQFfjS-2Fks=
+eIoNej4T2DQlcwzSdIhz-2B-2FS6k0OjL7QQLre9CmOe2gb8zlQOYKg7-2BUx024rdYDilpHA0s=
+FOQrgzVIGIiAlBlXvkd6aD7TbsAj3OiAJSZo1pS0MBByC-2BFxven6Oysyt95wgNUVvplXU3qdN=
+lSl3L4hgg6JvxobaqYYrw0Zpwm7Pt4Uw-3D-3D" alt=3D"" width=3D"1" height=3D"1" b=
+order=3D"0" style=3D"height:1px !important;width:1px !important;border-widt=
+h:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-ri=
+ght:0 !important;margin-left:0 !important;padding-top:0 !important;padding-=
+bottom:0 !important;padding-right:0 !important;padding-left:0 !important;"/=
+></body></html>
+--20183a681f18e53c3c233c0b643cadc60be37699476a4d75409796f6a85d--
